@@ -1,0 +1,25 @@
+<% if @stuff.any? %>
+  <table>
+    <thead>
+      <tr>
+        <td><th>Requester</th></td>
+        <td><th>Name</th></td>
+        <td><th>Category</th></td>
+        <td><th>Status</th></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @stuff.each do |stuff| %>
+        <tr>
+          <td><%= stuff.user.full_name %></td>
+          <td><%= stuff.stuff_name %></td>
+          <td><%= stuff.category.category_name %></td>
+          <td><%= stuff.status %></td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+<% else %>
+  <h5>No office stuff yet</h5>
+<% end %>

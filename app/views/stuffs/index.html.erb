@@ -1,0 +1,14 @@
+<div>
+  <%= form_with scope: :filter, url: root_path, method: 'get', local: true do |form|%>
+    <%= form.select :options, filter_options %>
+    <%= form.submit 'Filter'%>
+  <%end%>
+</div>
+
+<div>
+  <%= render 'stuff_list'%>
+</div>
+
+<div>
+  <%= link_to 'Request a new stuff', new_stuff_path%>
+</div>

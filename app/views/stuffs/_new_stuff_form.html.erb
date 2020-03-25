@@ -1,0 +1,13 @@
+<%= form_with scope: :stuff, url: new_stuff_path, method: :post, local: true do |form|%>
+  <p>
+    <%= form.label :category_id%>
+    <%= form.select :category_id,  options_from_collection_for_select(@categories, 'id', 'category_name')%>
+  <p>
+
+  <p>
+    <%= form.label :stuff_name, 'Requested stuff name:' %>
+    <%= form.text_field :stuff_name %>
+  </p>
+
+  <%= form.submit 'Request'%>
+<% end %>
