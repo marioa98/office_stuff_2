@@ -17,7 +17,7 @@
           <td><%= stuff.category.category_name %> | </td>
           <td><%= stuff.status %> | </td>
           <td><%= link_to 'Edit', edit_stuff_path(stuff.id) %> | </td>
-          <td><%= link_to 'Comment'%> | </td>
+          <td><%= link_to 'Comment', comments_index_path(stuff.id)%> | </td>
         </tr>
       <%end%>
     </tbody>

@@ -1,0 +1,9 @@
+<div>
+  <% if @comments.any? %>
+    <% @comments.each do |comment|%>
+      <p><%=comment.user.username%> --- <%= comment.comment %> --- <%= comment.created_at%></p>
+    <% end %>
+  <% else %>
+    <p> This stuff has not comments yet </p>
+  <% end %>
+</div>
