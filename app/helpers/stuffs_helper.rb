@@ -1,12 +1,11 @@
 module StuffsHelper
   def categories(category_id)
     categories = []
-    stuff_category = Category.find(@stuff.category_id).category_name
+    stuff_category = Category.find(@stuff.category_id)
     
     categories << stuff_category
-    Category.select(:category_name).where("category_name != ?", stuff_category).each do |category|
-      # binding.pry
-      categories << category.category_name
+    Category.where("category_name != ?", stuff_category).each do |category|
+      categories << category
     end
 
     categories

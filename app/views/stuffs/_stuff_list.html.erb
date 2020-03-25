@@ -2,20 +2,22 @@
   <table>
     <thead>
       <tr>
-        <td><th>Requester</th></td>
-        <td><th>Name</th></td>
-        <td><th>Category</th></td>
-        <td><th>Status</th></td>
+        <td> | <th>Requester | </th></td>
+        <td><th>Name | </th></td>
+        <td><th>Category | </th></td>
+        <td><th>Status | </th></td>
       </tr>
     </thead>
 
     <tbody>
       <% @stuff.each do |stuff| %>
         <tr>
-          <td><%= stuff.user.full_name %></td>
-          <td><%= stuff.stuff_name %></td>
-          <td><%= stuff.category.category_name %></td>
-          <td><%= stuff.status %></td>
+          <td> | <%= stuff.user.full_name %> | </td>
+          <td><%= stuff.stuff_name %> | </td>
+          <td><%= stuff.category.category_name %> | </td>
+          <td><%= stuff.status %> | </td>
+          <td><%= link_to 'Edit', edit_stuff_path(stuff.id) %> | </td>
+          <td><%= link_to 'Comment'%> | </td>
         </tr>
       <%end%>
     </tbody>
