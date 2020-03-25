@@ -2,9 +2,18 @@ class StuffsController < ActionController::Base
   def index
     @stuff = filter_options
   end
-
+  
   def new
     @categories = Category.all.order(category_name: :asc)
+  end
+
+  def edit
+    @stuff = Stuff.find(params[:id])
+  end
+
+  def update
+    Stuff.find(params[:id]).update!(category_id: stuff_params[:category_id], stuff_name: stuff_params[:stuff_name], status: stuff_params[:status].to_i)
+    redirect_to root_path
   end
 
   def create

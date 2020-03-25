@@ -1,0 +1,22 @@
+<%= form_with scope: :stuff, url: update_stuff_path, method: 'patch', local: true do |form|%>
+  <p>
+    <%= form.label :requester, "Requester: #{@stuff.user.username}" %>
+  </p>
+
+  <p>
+    <%= form.label :category_id %>
+    <%= form.select :category_id, options_from_collection_for_select(categories(@stuff.category_id), 'id', 'category_name')%>
+  </p>
+
+  <p>
+    <%= form.label :stuff_name, 'Name:' %>
+    <%= form.text_field :stuff_name, value: @stuff.stuff_name %>
+  </p>
+
+  <p>
+    <%= form.label :status, 'Status: '%>
+    <%= form.select :status, status(@stuff.status)%>
+  </p>
+
+  <%= form.submit 'Edit'%>
+<% end %>
