@@ -1,8 +1,4 @@
 require 'test_helper'
-# t.string "full_name", null: false
-# t.boolean "admin", default: false, null: false
-# t.string "username", null: false
-# t.string "password_digest", null: false
 
 class UserTest < ActiveSupport::TestCase
   test 'valid common user ' do
