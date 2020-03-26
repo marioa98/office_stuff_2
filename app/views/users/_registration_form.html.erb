@@ -1,4 +1,9 @@
-<%= form_with scope: :user, url: create_session_path, metho: :post, local: true do |form|%>
+<%= form_with scope: :user, url: create_user_path, method: :post, local: true do |form| %>
+  <p>
+    <%= form.label :full_name, 'Your name:' %>
+    <%= form.text_field :full_name %>
+  </p>
+
   <p>
     <%= form.label :username, 'Username:' %>
     <%= form.text_field :username %>

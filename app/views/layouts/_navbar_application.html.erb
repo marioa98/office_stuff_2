@@ -1,3 +1,10 @@
 <div>
-  <h1>This is a navbar</h1>
+  <% if logged_in?%>
+    <%= link_to 'Request a new stuff', new_stuff_path%>
+    <%= link_to 'Logout', logout_path, method: :delete%>
+  <%else%>
+    <%= link_to 'Login', new_session_path%>
+    <%= link_to 'Register', new_user_path%>
+  <%end%>
+  <hr>
 </div>

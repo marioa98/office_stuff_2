@@ -1,4 +1,7 @@
 class StuffsController < ApplicationController
+
+  skip_before_action :authorized, only: [:index]
+
   def index
     @stuff = filter_options
   end
