@@ -6,11 +6,12 @@
     <%= csp_meta_tag %>
 
     <link href="https://fonts.googleapis.com/icon?family=Material\Icons" rel="stylesheet">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <%= render partial: 'layouts/navbar_application'%>
     <%= yield %>
   </body>
 </html>

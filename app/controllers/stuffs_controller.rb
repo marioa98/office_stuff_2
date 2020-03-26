@@ -1,4 +1,4 @@
-class StuffsController < ActionController::Base
+class StuffsController < ApplicationController
   def index
     @stuff = filter_options
   end

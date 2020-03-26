@@ -1,4 +1,4 @@
-class CommentsController < ActionController::Base
+class CommentsController < ApplicationController
   def index
     @stuff = Stuff.find(params[:id])
     @comments = Comment.all.where(stuff_id: params[:id]).order(created_at: :asc)
