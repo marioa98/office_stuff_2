@@ -11,6 +11,20 @@ module StuffsHelper
     categories
   end
 
+  def category_color
+    {
+      "Books": "background-color: brown; color: white",
+      "Stationery": "background-color: green; color: black",
+      "Service department": "background-color: red; color: white",
+      "Cleaning": "background-color: blue; color: white",
+      "Furniture": "background-color: grey; color: black",
+      "Hardware reparations": "background-color: purple; color: white",
+      "Kitchen stuff": "background-color: orange; color: black",
+      "Licences and equipment": "background-color: yellow; color: black",
+      "Other": "background-color: black; color: white"
+    }
+  end
+
   def status(current_status)
     all_status = [current_status]
 
