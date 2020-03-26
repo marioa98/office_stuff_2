@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'new_stuff', to: 'stuffs#new'
   get 'edit/:id', to: 'stuffs#edit', as: 'edit_stuff'
   get 'comments/:id', to: 'comments#index', as: 'comments_index'
+  if Rails.env.development?
+    get 'coverage', to: redirect("#{Rails.root}/public/coverage/index.html")
+  end
 
   post 'new_stuff', to: 'stuffs#create'
   post 'comments/:id', to: 'comments#create', as: 'create_comment'

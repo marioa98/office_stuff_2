@@ -33,7 +33,6 @@ class StuffsController < ActionController::Base
       category_name = params[:filter][:category]
       category = Category.find_by(category_name: category_name)
 
-      # binding.pry
       if status == 'all' && category_name == 'All'
         Stuff.all
       elsif status != 'all' && category_name == 'All'
