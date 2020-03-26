@@ -1,6 +1,7 @@
 <div>
   <%= form_with scope: :filter, url: root_path, method: 'get', local: true do |form|%>
-    <%= form.select :options, filter_options %>
+    <%= form.select :status, status_options %>
+    <%= form.select :category, categories_options%>
     <%= form.submit 'Filter'%>
   <%end%>
 </div>

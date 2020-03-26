@@ -29,13 +29,19 @@ class StuffsController < ActionController::Base
   
   def filter_options
     if params.key?(:filter)
-      option = params[:filter][:options].downcase
+      status = params[:filter][:status].downcase
+      category_name = params[:filter][:category]
+      category = Category.find_by(category_name: category_name)
 
-      case option
-      when 'all' || nil
+      # binding.pry
+      if status == 'all' && category_name == 'All'
         Stuff.all
+      elsif status != 'all' && category_name == 'All'
+        Stuff.all.where(status: status)
+      elsif status == 'all' && category_name != 'All'
+        Stuff.all.where(category: category)
       else
-        Stuff.where(status: option)
+        Stuff.all.where(category: category,status: status)
       end
     else
       Stuff.all

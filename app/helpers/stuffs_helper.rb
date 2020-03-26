@@ -19,7 +19,17 @@ module StuffsHelper
     end
   end
 
-  def filter_options
+  def categories_options
+    options = ['All']
+    
+    Category.all.order(category_name: :asc).each do |category|
+      options << category.category_name
+    end
+
+    options
+  end
+
+  def status_options
     ['All', 'Open', 'Fullfilled', 'Dismissed']
   end
 end
