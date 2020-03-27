@@ -1,10 +1,10 @@
-<%= form_with scope: :user, url: create_user_path, method: :post, local: true do |form| %>
+<%= form_with scope: :user, url: update_profile_path, methdo: :post, local: true do |form|%>
   
   <% if @user.errors.any?%>
     <div class="error">
       <h3>
         <%= pluralize(@user.errors.count, "error")%>
-        Something happened wrong trying to register you.
+        Error while updating profile.
       </h3>
 
       <ul>
@@ -17,23 +17,20 @@
 
   <p>
     <%= form.label :full_name, 'Your name:' %>
-    <%= form.text_field :full_name %>
+    <%= form.text_field :full_name, value: @user.full_name %>
   </p>
+
+  <p>Admin: <%= @user.admin?%></p>
 
   <p>
     <%= form.label :username, 'Username:' %>
-    <%= form.text_field :username %>
+    <%= form.text_field :username, value: @user.username %>
   </p>
 
   <p>
     <%= form.label :email, 'Email:' %>
-    <%= form.text_field :email %>
+    <%= form.text_field :email, value: show_email(@user.email) %>
   </p>
 
-  <p>
-    <%= form.label :password, 'Password:' %>
-    <%= form.password_field :password %>
-  </p>
-
-  <%= form.submit 'Register'%>
+  <%= form.submit 'Update profile'%>
 <% end %>
