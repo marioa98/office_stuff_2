@@ -20,7 +20,7 @@ class StuffsController < ApplicationController
   end
 
   def create
-    Stuff.create!(category_id: stuff_params[:category_id], stuff_name: stuff_params[:stuff_name], user: User.first)
+    Stuff.create!(category_id: stuff_params[:category_id], stuff_name: stuff_params[:stuff_name], user_id: session[:user_id])
     redirect_to root_path
   end
 
