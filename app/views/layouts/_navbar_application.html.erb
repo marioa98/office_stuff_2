@@ -1,5 +1,6 @@
 <div>
   <% if logged_in?%>
+    <p>Welcome <%= @user.full_name%></p>
     <%= link_to 'Request a new stuff', new_stuff_path%>
     <%= link_to 'Logout', logout_path, method: :delete%>
   <%else%>

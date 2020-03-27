@@ -21,8 +21,10 @@
             </div>
           </td>
           <td> | <%= stuff.status %> | </td>
-          <%if logged_in?%>
+          <% if can_edit?(stuff)%>
             <td><%= link_to 'Edit', edit_stuff_path(stuff.id) %> | </td>
+          <%end%>
+          <%if logged_in?%>
             <td><%= link_to 'Comment', comments_index_path(stuff.id)%> | </td>
           <%end%>
         </tr>
