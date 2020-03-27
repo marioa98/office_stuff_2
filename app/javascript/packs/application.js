@@ -18,3 +18,9 @@ require("channels")
 //= require jquery  
 //= require turbolinks  
 //= require materialize-sprockets
+// import '../../assets/stylesheets/application'
+// import 'materialize-css/dist/css/materialize'
+
+// $(document).ready(function() {
+//     $('select').material_select();
+// });

@@ -1,9 +1,13 @@
-class StuffsController < ActionController::Base
+class StuffsController < ApplicationController
+
+  skip_before_action :authorized, only: [:index]
+
   def index
     @stuff = filter_options
   end
   
   def new
+    @stuff = Stuff.new
     @categories = Category.all.order(category_name: :asc)
   end
 
@@ -12,13 +16,19 @@ class StuffsController < ActionController::Base
   end
 
   def update
-    Stuff.find(params[:id]).update!(category_id: stuff_params[:category_id], stuff_name: stuff_params[:stuff_name], status: stuff_params[:status].to_i)
+    Stuff.find(params[:id]).update!(status: stuff_params[:status].to_i)
     redirect_to root_path
   end
 
   def create
-    Stuff.create!(category_id: stuff_params[:category_id], stuff_name: stuff_params[:stuff_name], user: User.first)
-    redirect_to root_path
+    @stuff = Stuff.new(category_id: stuff_params[:category_id], stuff_name: stuff_params[:stuff_name], user_id: session[:user_id])
+    
+    if @stuff.save
+      redirect_to root_path
+    else
+      flash[:alert] = 'Please add the stuff name before to request.'
+      redirect_to new_stuff_path
+    end
   end
 
   private

@@ -11,6 +11,24 @@ module StuffsHelper
     categories
   end
 
+  def can_edit?(stuff)
+    @stuff = stuff
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      im_admin_owner || is_public
+    else
+      false
+    end
+  end
+
+  def im_admin_owner
+    logged_in? &&  @user.admin? && @stuff.user_id == @user.id
+  end
+
+  def is_public
+    logged_in? && !@stuff.user.admin?
+  end
+
   def category_color
     {
       "Books": "background-color: brown; color: white",
@@ -21,7 +39,8 @@ module StuffsHelper
       "Hardware reparations": "background-color: purple; color: white",
       "Kitchen stuff": "background-color: orange; color: black",
       "Licences and equipment": "background-color: yellow; color: black",
-      "Other": "background-color: black; color: white"
+      "Other": "background-color: black; color: white",
+      "Computer accesories": "background-color: pink; color: black"
     }
   end
 

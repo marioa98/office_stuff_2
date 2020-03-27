@@ -1,0 +1,22 @@
+<% if @common_users.any? %>
+  <table>
+    <thead>
+      <tr>
+        <td> | <th>Full name | </th></td>
+        <td><th>Username | </th></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @common_users.each do |common|%>
+        <tr>
+          <td>| <%= common.full_name %> |</td>
+          <td><%= common.username %> |</td>
+          <td><%= link_to 'Convert to admin', to_admin_path(common.id), method: :post%> |</td>
+        <tr>
+      <%end%>
+    </tbody>
+  </table>
+<% else %>
+  <h5>No common users saved</h5>
+<% end %>

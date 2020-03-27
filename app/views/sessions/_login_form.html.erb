@@ -1,0 +1,18 @@
+<%= form_with scope: :user, url: create_session_path, method: :post, local: true do |form|%>
+  
+  <% if flash[:alert]%>
+    <%= flash[:alert]%>
+  <%end%>
+
+  <p>
+    <%= form.label :username, 'Username:' %>
+    <%= form.text_field :username %>
+  </p>
+
+  <p>
+    <%= form.label :password, 'Password:' %>
+    <%= form.password_field :password %>
+  </p>
+
+  <%= form.submit 'Register'%>
+<% end %>

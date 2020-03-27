@@ -4,17 +4,15 @@
   </p>
 
   <p>
-    <%= form.label :category_id %>
-    <%= form.select :category_id, options_from_collection_for_select(categories(@stuff.category_id), 'id', 'category_name')%>
+    <%= form.label :category, "Category: #{@stuff.category.category_name}" %>
   </p>
 
   <p>
-    <%= form.label :stuff_name, 'Name:' %>
-    <%= form.text_field :stuff_name, value: @stuff.stuff_name %>
+    <%= form.label :stuff_name, "Name: #{@stuff.stuff_name}" %>
   </p>
 
   <p>
-    <%= form.label :status, 'Status: '%>
+    <%= form.label :status, "Status (#{@stuff.status}): "%>
     <%= form.select :status, status(@stuff.status)%>
   </p>
 
