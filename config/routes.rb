@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'signin', to: 'users#new', as: 'new_user'
   get 'users', to: 'users#index', as: 'users_index'
   get 'profile', to: 'users#profile', as: 'my_profile'
+  get 'details/:id', to: 'stuffs#details', as: 'stuff_details'
 
   if Rails.env.development?
     get 'coverage', to: redirect("#{Rails.root}/public/coverage/index.html")
