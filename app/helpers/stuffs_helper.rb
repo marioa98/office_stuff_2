@@ -15,13 +15,13 @@ module StuffsHelper
     @stuff = stuff
     if session[:user_id]
       @user = User.find(session[:user_id])
-      im_admin || is_public
+      im_admin_owner || is_public
     else
       false
     end
   end
 
-  def im_admin
+  def im_admin_owner
     logged_in? &&  @user.admin? && @stuff.user_id == @user.id
   end
 

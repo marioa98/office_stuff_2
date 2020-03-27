@@ -5,6 +5,15 @@ class UsersController < ApplicationController
   def new
   end
   
+  def index
+    @common_users = User.select(:id, :full_name, :username).where(admin: false)
+  end
+
+  def to_admin
+    User.find(params[:id]).update(admin: true)
+    redirect_to users_index_path
+  end
+
   def create
     @user = User.new(user_params)
 
