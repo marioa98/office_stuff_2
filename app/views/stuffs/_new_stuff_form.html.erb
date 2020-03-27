@@ -1,4 +1,9 @@
 <%= form_with scope: :stuff, url: new_stuff_path, method: :post, local: true do |form|%>
+  
+  <% if flash[:alert]%>
+    <%= flash[:alert]%>
+  <% end %>
+
   <p>
     <%= form.label :category_id%>
     <%= form.select :category_id,  options_from_collection_for_select(@categories, 'id', 'category_name')%>

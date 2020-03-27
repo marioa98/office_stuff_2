@@ -1,11 +1,15 @@
 <div>
   <%= form_with scope: :comment, url: create_comment_path(params[:id]), method: :post, local: true do |form| %>
+    
+    <% if flash[:alert]%>
+      <%= flash[:alert]%>
+    <% end %>
+    
     <p>
-    <%= form.label :comment %><br>
-    <%= form.text_area :comment, size: '40x5'%>
-  </p>
+      <%= form.label :comment %><br>
+      <%= form.text_area :comment, size: '40x5'%>
+    </p>
 
-  <p>
     <%= form.submit "Share comment"%>
   <% end %>
 </div>

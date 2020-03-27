@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   skip_before_action :authorized, only: [:new, :login]
 
   def new
+    @user = User.new
   end
 
   def login
@@ -12,7 +13,8 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      redirect_to new_session_path
+      flash[:alert] = "Username or password invalid. Please fill correctly"
+      render 'new'
     end
   end
 

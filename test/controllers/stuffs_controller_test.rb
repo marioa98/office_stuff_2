@@ -43,7 +43,7 @@ class StuffsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create a new stuff request' do
     assert_difference('Stuff.count') do
-      post new_stuff_path, params: { stuff: {category_id: @category.id, stuff_name: Faker::Commerce.material}}
+      post new_stuff_path, params: { stuff: {category_id: @category.id, stuff_name: Faker::Commerce.material}, session: {id: @user.id}}
     end
 
     assert_redirected_to root_path

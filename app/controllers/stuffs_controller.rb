@@ -7,6 +7,7 @@ class StuffsController < ApplicationController
   end
   
   def new
+    @stuff = Stuff.new
     @categories = Category.all.order(category_name: :asc)
   end
 
@@ -20,8 +21,14 @@ class StuffsController < ApplicationController
   end
 
   def create
-    Stuff.create!(category_id: stuff_params[:category_id], stuff_name: stuff_params[:stuff_name], user_id: session[:user_id])
-    redirect_to root_path
+    @stuff = Stuff.new(category_id: stuff_params[:category_id], stuff_name: stuff_params[:stuff_name], user_id: session[:user_id])
+    
+    if @stuff.save
+      redirect_to root_path
+    else
+      flash[:alert] = 'Please add the stuff name before to request.'
+      redirect_to new_stuff_path
+    end
   end
 
   private
