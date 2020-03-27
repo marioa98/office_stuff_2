@@ -1,0 +1,17 @@
+<h1>New Comment in your requested stuff: "<%= @stuff.stuff_name%>"</h1>
+
+<p>
+  Hi <%= @user.full_name%>:
+
+  <%= @comment.user.full_name%> has been commented a requested stuff by you:
+    - Requested stuff: <%= @stuff.stuff_name%>
+    - Comment at: <%= @comment.created_at%>
+    - Content:
+        "<%= @comment.comment%>"
+</p>
+
+<p>
+  To access to the comment please visit <%= @url%> and login. 
+</p>
+
+<p>Have a good day</p>

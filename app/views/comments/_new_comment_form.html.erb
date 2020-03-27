@@ -1,5 +1,5 @@
 <div>
-  <%= form_with scope: :comment, url: create_comment_path(params[:id]), method: :post, local: true do |form| %>
+  <%= form_with scope: :comment, url: create_comment_url(params[:id]), method: :post, local: true do |form| %>
     
     <% if flash[:alert]%>
       <%= flash[:alert]%>

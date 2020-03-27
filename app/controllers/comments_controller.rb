@@ -7,13 +7,17 @@ class CommentsController < ApplicationController
 
   def create
     stuff = Stuff.find(params[:id])
+    user = User.find(session[:user_id])
 
-    @comment = Comment.new(stuff: stuff, comment: comments_params[:comment], user_id: session[:user_id])
-    if @comment.save
-      redirect_to comments_index_path(params[:id])
-    else
-      flash[:alert] = 'Comments cannot be blank'
-      redirect_to comments_index_path(params[:id])
+    @comment = Comment.new(stuff: stuff, comment: comments_params[:comment], user_id: user.id)
+    respond_to do |format|
+      if @comment.save
+        CommentMailer.with(stuff: stuff, commenter: user, content: @comment).new_comment.deliver_now
+        format.html {redirect_to comments_index_path(params[:id])}
+      else
+        flash[:alert] = 'Comments cannot be blank'
+        format.html {redirect_to comments_index_path(params[:id])}
+      end
     end
   end
 
