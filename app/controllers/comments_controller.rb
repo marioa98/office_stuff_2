@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(stuff: stuff, comment: comments_params[:comment], user_id: user.id)
     respond_to do |format|
       if @comment.save
-        CommentMailer.with(stuff: stuff, commenter: user, content: @comment).new_comment.deliver_now
+        CommentMailer.with(stuff: stuff, commenter: user, content: @comment).new_comment.deliver_now unless stuff.user.id == session[:user_id]
         format.html {redirect_to comments_index_path(params[:id])}
       else
         flash[:alert] = 'Comments cannot be blank'
