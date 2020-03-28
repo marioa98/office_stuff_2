@@ -7,6 +7,5 @@
 <p><b>Date of request:</b> <%= @stuff.created_at%></p>
 
 <hr>
-<% if !logged_in? %>
-    <%= link_to 'Go Back', root_path%>
-<% end %>
+
+<%= link_to 'Go Back', root_path%>

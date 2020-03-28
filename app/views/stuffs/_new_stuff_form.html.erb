@@ -1,4 +1,4 @@
-<%= form_with scope: :stuff, url: new_stuff_path, method: :post, local: true do |form|%>
+<%= form_with scope: :stuff, url: new_stuff_url, method: :post, local: true do |form|%>
   
   <% if flash[:alert]%>
     <%= flash[:alert]%>
