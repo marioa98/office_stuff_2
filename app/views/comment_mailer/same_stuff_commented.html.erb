@@ -1,11 +1,11 @@
-<h1>Someone comment in your stuff: "<%= @stuff.stuff_name%>"</h1>
+<h1>Someone has comment the same stuff</h1>
 
 <p>
-  Hi <%= @user.full_name%>: <br/>
+  Hi: <br/>
 
   <%= @comment.user.full_name%> has already comment a stuff requested by you: <br/>
-    - Requested stuff: <%= @stuff.stuff_name%>. <br/>
-    - Comment at: <%= @comment.created_at%>. <br/>
+    - Stuff commented: <%= @stuff.stuff_name%>. <br/>
+    - Commented at: <%= @comment.created_at%>. <br/>
     - Content:<br/>
         "<%= @comment.comment%>".<br/>
 </p>
