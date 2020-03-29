@@ -1,4 +1,4 @@
-<%= form_with scope: :stuff, url: update_stuff_path, method: 'patch', local: true do |form|%>
+<%= form_with scope: :stuff, url: update_stuff_url, method: 'patch', local: true do |form|%>
   <p>
     <%= form.label :requester, "Requester: #{@stuff.user.username}" %>
   </p>

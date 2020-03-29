@@ -1,0 +1,17 @@
+<h1>Someone has comment the same stuff</h1>
+
+<p>
+  Hi: <br/>
+
+  <%= @comment.user.full_name%> has already comment a stuff requested by you: <br/>
+    - Stuff commented: <%= @stuff.stuff_name%>. <br/>
+    - Commented at: <%= @comment.created_at%>. <br/>
+    - Content:<br/>
+        "<%= @comment.comment%>".<br/>
+</p>
+
+<p>
+  To access to the comment please visit <%= @url%> and login. 
+</p>
+
+<p>Have a good day</p>

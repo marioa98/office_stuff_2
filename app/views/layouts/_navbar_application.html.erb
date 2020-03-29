@@ -1,15 +1,22 @@
 <div>
   <% if logged_in?%>
     <%user = User.find(session[:user_id])%>
+    
     <p>Welcome <%= user.full_name%></p>
+    
     <% if user.admin?%>
       <%= link_to 'User\'s index', users_index_path%>
     <%end%>
+
     <%= link_to 'Request a new stuff', new_stuff_path%>
+    <%= link_to 'My profile', my_profile_path%>
     <%= link_to 'Logout', logout_path, method: :delete%>
+
   <%else%>
+    
     <%= link_to 'Login', new_session_path%>
     <%= link_to 'Register', new_user_path%>
+  
   <%end%>
   <hr>
 </div>

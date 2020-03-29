@@ -26,7 +26,7 @@ module StuffsHelper
   end
 
   def is_public
-    logged_in? && !@stuff.user.admin?
+    logged_in? && !@stuff.user.admin? && @user.admin?
   end
 
   def category_color
