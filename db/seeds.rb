@@ -8,6 +8,5 @@ Category.create([{category_name: 'Computer accesories'},
     {category_name: 'Kitchen stuff'},
     {category_name: 'Licences and equipment'},
     {category_name: 'Other'}])
-User.create(full_name: 'Anonymous', username: 'anon', password: 'abcd1234')
 
 puts "All data loaded"
