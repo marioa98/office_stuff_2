@@ -2,22 +2,22 @@ require 'test_helper'
 
 class StuffTest < ActiveSupport::TestCase
   def setup 
-   category = Category.create(category_name: Faker::Commerce.department)
-   user = User.create(full_name: Faker::Name.name, username: Faker::Internet.username, password: Faker::Lorem.word)
+   @category = Category.new(category_name: Faker::Commerce.department)
+   @user = User.new(full_name: Faker::Name.name, username: Faker::Internet.username, password: Faker::Lorem.word, email: Faker::Internet.email)
    @stuff = Stuff.new(
-      user: user, 
-      category: category,
       stuff_name: Faker::Name.name
     )
   end
 
   test 'validates stuff with valid params' do
+    @stuff.user = @user
+    @stuff.category = @category
     assert @stuff.valid?
   end
 
   test 'validates stuff without params' do
-    @stuff = Stuff.new
-    assert_not @stuff.valid?
+    stuff = Stuff.new
+    assert_not stuff.valid?
   end
   
   test 'validates stuff without stuff_name' do
@@ -29,13 +29,13 @@ class StuffTest < ActiveSupport::TestCase
     assert @stuff.open? 
   end
 
-  test 'validates stuff is saved without user_id' do
-    @stuff.user_id = ''
+  test 'validates stuff is saved without user' do
+    @stuff.category = @category 
     assert_not @stuff.valid? 
   end  
   
-  test 'validates stuff is saved without category_id' do
-    @stuff.category_id = ''
+  test 'validates stuff is saved without category' do
+    @stuff.user = @user
     assert_not @stuff.valid?
   end
 end
