@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   root 'stuffs#index'
 
@@ -25,4 +26,7 @@ Rails.application.routes.draw do
   patch 'edit/:id', to: 'stuffs#update', as: 'update_stuff'
 
   delete 'logout', to: 'sessions#logout', as: 'logout'
+
+  mount Sidekiq::Web => '/sidekiq'
+
 end
