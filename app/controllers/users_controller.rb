@@ -32,8 +32,8 @@ class UsersController < ApplicationController
 
   def update_profile
     @user = User.find(session[:user_id])
-
     if @user.update(user_params)
+      flash[:notice] = "Profile updated successfully"
       redirect_to my_profile_path
     else
       render 'profile'

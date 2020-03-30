@@ -1,5 +1,9 @@
 <%= form_with scope: :user, url: update_profile_path, methdo: :post, local: true do |form|%>
   
+  <%if flash[:notice]%>
+    <%= flash[:notice]%>
+  <%end%>
+
   <% if @user.errors.any?%>
     <div class="error">
       <h3>
