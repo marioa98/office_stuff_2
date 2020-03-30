@@ -11,14 +11,12 @@ class CommentsController < ApplicationController
 
     @comment = Comment.new(stuff: @stuff, comment: comments_params[:comment], user_id: @user.id)
     
-    respond_to do |format|
-      if @comment.save
-        CommentsJob.perform_later(@stuff, extract_recipients, @comment)
-        format.html {redirect_to comments_index_path(params[:id])}
-      else
-        flash[:alert] = 'Comments cannot be blank'
-        format.html {redirect_to comments_index_path(params[:id])}
-      end
+    if @comment.save
+      CommentsJob.perform_later(@stuff, extract_recipients, @comment, @user.id)
+      redirect_to comments_index_path(params[:id])
+    else
+      flash[:alert] = 'Comments cannot be blank'
+      redirect_to comments_index_path(params[:id])
     end
   end
 
