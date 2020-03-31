@@ -22,28 +22,24 @@ class StuffsController < ApplicationController
   def update
     @stuff = Stuff.find(params[:id])
     
-    respond_to do |format|
-      if @stuff.update(status: stuff_params[:status].to_i)
-        StuffMailer.with(stuff: @stuff).set_status.deliver_now
-        format.html { redirect_to root_path }
-      else
-        flash[:alert] = "Error trying to set status"
-        format.html { redirect_to edit_stuff_path(params[:id])}
-      end
+    if @stuff.update(status: stuff_params[:status].to_i)
+      StuffsJob.perform_later(@stuff, 'update')
+      redirect_to root_path
+    else
+      flash[:alert] = "Error trying to set status"
+      redirect_to edit_stuff_path(params[:id])
     end
   end
 
   def create
     @stuff = Stuff.new(category_id: stuff_params[:category_id], stuff_name: stuff_params[:stuff_name], user_id: session[:user_id])
     
-    respond_to do |format|
-      if @stuff.save
-        StuffMailer.with(stuff: @stuff).new_request.deliver_now
-        format.html { redirect_to root_path }
-      else
-        flash[:alert] = 'Please add the stuff name before to request.'
-        format.html { redirect_to new_stuff_path }
-      end
+    if @stuff.save
+      StuffsJob.perform_later(@stuff, 'create')
+      redirect_to root_path 
+    else
+      flash[:alert] = 'Please add the stuff name before to request.'
+      redirect_to new_stuff_path
     end
   end
 

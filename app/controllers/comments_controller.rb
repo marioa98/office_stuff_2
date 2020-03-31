@@ -11,22 +11,19 @@ class CommentsController < ApplicationController
 
     @comment = Comment.new(stuff: @stuff, comment: comments_params[:comment], user_id: @user.id)
     
-    respond_to do |format|
-      if @comment.save
-        CommentMailer.with(stuff: @stuff, recipients: extract_recipients, content: @comment).same_stuff_commented.deliver_now
-        CommentMailer.with(stuff: @stuff, commenter: @user, content: @comment).new_comment.deliver_now unless @stuff.user.id == session[:user_id]
-        format.html {redirect_to comments_index_path(params[:id])}
-      else
-        flash[:alert] = 'Comments cannot be blank'
-        format.html {redirect_to comments_index_path(params[:id])}
-      end
+    if @comment.save
+      CommentsJob.perform_later(@stuff, extract_recipients, @comment, @user.id)
+      redirect_to comments_index_path(params[:id])
+    else
+      flash[:alert] = 'Comments cannot be blank'
+      redirect_to comments_index_path(params[:id])
     end
   end
 
   private
 
   def extract_recipients
-    commenters = Comment.where("stuff_id = ? AND user_id != ?", @stuff.id, @user.id).pluck(:user_id)
+    commenters = Comment.where("stuff_id = ? AND user_id != ?", @stuff.id, @user.id).distinct.pluck(:user_id)
 
     recipients = []
     commenters.each do |user_id|
