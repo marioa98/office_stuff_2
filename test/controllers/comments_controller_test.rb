@@ -2,24 +2,33 @@ require 'test_helper'
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    User.create(full_name: Faker::Name.name, username: Faker::Internet.username, password: Faker::Lorem.word)
-    Category.create(category_name: Faker::Commerce.department)
+    @password = Faker::Lorem.word
+    @user = User.new(full_name: Faker::Name.name, email: Faker::Internet.email,username: Faker::Internet.username, password: @password)
+    category = Category.new(category_name: Faker::Commerce.department)
+    @stuff = Stuff.new(user: @user, category: category, stuff_name: Faker::Commerce.material)
 
-    @user = User.first
-    category = Category.first
-    Stuff.create(user_id: @user.id, category_id: category.id, stuff_name: Faker::Commerce.material)
-    @stuff = Stuff.first
+    @user.save
+    @stuff.save
+
+    post '/login', params: {user: {username_or_email: @user.email, password: @password}}
+    assert_redirected_to root_path
   end
-
+  
   test 'should get the comments route for a stuff' do
-    get comments_index_path(@stuff.id)
+    get "/comments/#{@stuff.id}"
     assert_response :success
   end
-
+  
   test 'should create a comment for a stuff' do
     assert_difference("Comment.all.where(stuff_id: #{@stuff.id}).count") do
       post create_comment_path(@stuff.id), params: { comment: { comment: Faker::Lorem.sentence}}
     end
+    assert_redirected_to comments_index_path(@stuff.id)
+  end
+
+  test 'shoul get error creating a comment' do
+    post create_comment_path(@stuff.id), params: {comment: {comment: nil}}
+    assert_equal 'Comments cannot be blank', flash[:alert]
     assert_redirected_to comments_index_path(@stuff.id)
   end
 end
