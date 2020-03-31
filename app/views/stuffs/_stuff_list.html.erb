@@ -16,7 +16,8 @@
           <td> | <%= stuff.user.full_name %> | </td>
           <td><%= stuff.stuff_name %> | </td>
           <td>
-            <div style="<%=category_color.fetch(:"#{category}")%>">
+            <%style = category_color.fetch(:"#{category}", false)%>
+            <div style="<%= style ? style : "background-color: white; color: black"%>">
               <%= category %> 
             </div>
           </td>

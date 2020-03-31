@@ -33,7 +33,7 @@
 
   <p>
     <%= form.label :email, 'Email:' %>
-    <%= form.text_field :email, value: show_email(@user.email) %>
+    <%= form.text_field :email, value: @user.email %>
   </p>
 
   <%= form.submit 'Update profile'%>
