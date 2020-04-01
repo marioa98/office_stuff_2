@@ -14,6 +14,10 @@ jobs:
     services:
       db:
         image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports: ['5432:5432']
         options: >-
           --health-cmd pg_isready
@@ -40,17 +44,30 @@ jobs:
       - uses: borales/actions-yarn@v2.0.0
         with:
           cmd: install
+          
       - name: Install pg client
         run: sudo apt-get install libpq-dev
-      - name: Run tests
+      
+      - name: Build App
         env:
-          DATABASE_URL: postgres://postgres:@localhost:5432/test
-          REDIS_URL: redis://localhost:6379/0
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: postgres
           RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
-          bundle exec rake db:reset
+          bin/rails db:setup
+          yarn install --check-files
+          bundle exec rails webpacker:compile
+        
+      - name: Run tests
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          PGPORT: ${{ job.services.postgres.ports[5432] }}
+          RAILS_ENV: test
+        run: |
           bundle exec rake test
          
