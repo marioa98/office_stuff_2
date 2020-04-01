@@ -1,4 +1,3 @@
-ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
 SimpleCov.coverage_dir('public/coverage')
 SimpleCov.start 'rails' do
@@ -8,3 +7,4 @@ SimpleCov.start 'rails' do
   add_group 'Controllers', 'app/controllers'
   add_group 'Models', 'app/models'  
 end
+ENV['RAILS_ENV'] ||= 'test'

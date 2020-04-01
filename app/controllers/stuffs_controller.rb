@@ -22,13 +22,9 @@ class StuffsController < ApplicationController
   def update
     @stuff = Stuff.find(params[:id])
     
-    if @stuff.update(status: stuff_params[:status].to_i)
-      StuffsJob.perform_later(@stuff, 'update')
-      redirect_to root_path
-    else
-      flash[:alert] = "Error trying to set status"
-      redirect_to edit_stuff_path(params[:id])
-    end
+    @stuff.update(status: stuff_params[:status].to_i)
+    StuffsJob.perform_later(@stuff, 'update')
+    redirect_to root_path
   end
 
   def create
@@ -46,7 +42,7 @@ class StuffsController < ApplicationController
   private
 
   def stuff_params
-    params.require(:stuff).permit(:category_id, :stuff_name, :status, :user)
+    params.require(:stuff).permit(:category_id, :stuff_name, :status)
   end
 
   def filter_options
