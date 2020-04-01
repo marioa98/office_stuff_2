@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StuffTest < ActiveSupport::TestCase
   def setup 
-   @category = Category.new(category_name: Faker::Commerce.department)
+    @category = Category.first.valid? ? Category.first : Category.create(category_name: Faker::Commerce.department)
    @user = User.new(full_name: Faker::Name.name, username: Faker::Internet.username, password: Faker::Lorem.word, email: Faker::Internet.email)
    @stuff = Stuff.new(
       stuff_name: Faker::Name.name
