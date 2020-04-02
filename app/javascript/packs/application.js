@@ -15,12 +15,3 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-//= require jquery  
-//= require turbolinks  
-//= require materialize-sprockets
-// import '../../assets/stylesheets/application'
-// import 'materialize-css/dist/css/materialize'
-
-// $(document).ready(function() {
-//     $('select').material_select();
-// });
