@@ -10,6 +10,7 @@ SimpleCov.start 'rails' do
   add_group 'Models', 'app/models'  
 end
 ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
 
 knapsack_pro_adapter = KnapsackPro::Adapters::MinitestAdapter.bind
 knapsack_pro_adapter.set_test_helper_path(__FILE__)
