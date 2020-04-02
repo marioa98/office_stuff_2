@@ -14,6 +14,7 @@ class StuffsControllerTest < ActionDispatch::IntegrationTest
     )
 
     @user.save
+    @stuff = Stuff.new(user: @user, category: @category, stuff_name: Faker::Commerce.unique.material)
     post '/login', params: {user: {username_or_email: @user.email, password: password}}
   end
   
@@ -88,6 +89,7 @@ class StuffsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should GET details of stuff' do
+    @stuff.save unless  Stuff.first.present?
     stuff = Stuff.first
     get "/details/#{stuff.id}"
 
@@ -96,6 +98,7 @@ class StuffsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should GET edit_stuff_path' do
+    @stuff.save unless  Stuff.first.present?
     stuff = Stuff.first
     get "/edit/#{stuff.id}"
 
@@ -104,8 +107,9 @@ class StuffsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should UPDATE new stuff' do
-    Stuff.first.update(status: 0)
+    @stuff.save unless  Stuff.first.present?
     stuff = Stuff.first
+    Stuff.first.update(status: 0)
 
     patch "/edit/#{stuff.id}", params: {stuff: {status: '1'}}
 
