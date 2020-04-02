@@ -5,8 +5,8 @@ class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(
       full_name: Faker::Name.name,
-      username: Faker::Internet.username,
-      email: Faker::Internet.email,
+      username: Faker::Internet.unique.username,
+      email: Faker::Internet.unique.email,
       password: Faker::Lorem.word
     )
   end

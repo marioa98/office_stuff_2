@@ -7,15 +7,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     @user = User.new(
       full_name: Faker::Name.name,
-      username: Faker::Internet.username,
-      email: Faker::Internet.email,
+      username: Faker::Internet.unique.username,
+      email: Faker::Internet.unique.email,
       password: @password
     )
 
     @user_2 = User.new(
       full_name: Faker::Name.name,
-      username: Faker::Internet.username,
-      email: Faker::Internet.email,
+      username: Faker::Internet.unique.username,
+      email: Faker::Internet.unique.email,
       password: @password
     )
   end

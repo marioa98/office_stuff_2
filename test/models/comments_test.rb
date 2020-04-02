@@ -2,8 +2,13 @@ require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
   def setup
-    category = Category.first.valid? ? Category.first : Category.create(category_name: Faker::Commerce.department)
-    @user = User.new(full_name: Faker::Name.name, username: Faker::Internet.username, password: Faker::Lorem.word)
+    category = Category.first.valid? ? Category.first : Category.create(category_name: Faker::Commerce.unique.department)
+    @user = User.new(
+      full_name: Faker::Name.name, 
+      username: Faker::Internet.unique.username, 
+      email: Faker::Internet.unique.email,
+      password: Faker::Lorem.word
+    )
     @stuff = Stuff.new(user: @user, category: category, stuff_name: Faker::Name.name)
   end
   
