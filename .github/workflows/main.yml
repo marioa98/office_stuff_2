@@ -58,7 +58,7 @@ jobs:
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
-          bin/rails db:setup
+          bin/rails db:reset
         
       - name: Run tests
         env:
