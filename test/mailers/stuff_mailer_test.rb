@@ -4,20 +4,20 @@ class StuffMailerTest < ActionMailer::TestCase
   def setup
     @admin = User.new(
       full_name: Faker::Name.name,
-      email: Faker::Internet.email,
-      username: Faker::Internet.username,
+      email: Faker::Internet.unique.email,
+      username: Faker::Internet.unique.username,
       password: Faker::Lorem.word,
       admin: true
     )
 
     @common = User.new(
       full_name: Faker::Name.name,
-      email: Faker::Internet.email,
-      username: Faker::Internet.username,
+      email: Faker::Internet.unique.email,
+      username: Faker::Internet.unique.username,
       password: Faker::Lorem.word
     )
 
-    category = Category.first.present? ? Category.first : Category.create(category_name: Faker::Commerce.department)
+    category = Category.first.present? ? Category.first : Category.create(category_name: Faker::Commerce.unique.department)
     
     @admin.save
     @common.save
@@ -25,7 +25,7 @@ class StuffMailerTest < ActionMailer::TestCase
     @stuff = Stuff.new(
       category: category,
       user: @common,
-      stuff_name: Faker::Commerce.material
+      stuff_name: Faker::Commerce.unique.material
     )
   end
 

@@ -3,7 +3,7 @@ require 'test_helper'
 class SessionsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @password = Faker::Lorem.word
-    @user = User.new(full_name: Faker::Name.name, email: Faker::Internet.email,username: Faker::Internet.username, password: @password)
+    @user = User.new(full_name: Faker::Name.name, email: Faker::Internet.unique.email,username: Faker::Internet.unique.username, password: @password)
 
     @user.save
   end

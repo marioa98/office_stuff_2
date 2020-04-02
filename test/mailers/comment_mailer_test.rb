@@ -5,19 +5,19 @@ class CommentMailerTest < ActionMailer::TestCase
     password = Faker::Lorem.word
     @user = User.new(
       full_name: Faker::Name.name,
-      email: Faker::Internet.email,
-      username: Faker::Internet.username,
+      email: Faker::Internet.unique.email,
+      username: Faker::Internet.unique.username,
       password: password
     )
 
     @user_2 = User.new(
       full_name: Faker::Name.name,
-      email: Faker::Internet.email,
-      username: Faker::Internet.username,
+      email: Faker::Internet.unique.email,
+      username: Faker::Internet.unique.username,
       password: password
     )
 
-    category = Category.first.present? ? Category.first : Category.create(category_name: Faker::Commerce.department)
+    category = Category.first.present? ? Category.first : Category.create(category_name: Faker::Commerce.unique.department)
 
     @user.save
     @user_2.save
@@ -25,7 +25,7 @@ class CommentMailerTest < ActionMailer::TestCase
     @stuff = Stuff.new(
       category: category,
       user: @user,
-      stuff_name: Faker::Commerce.material
+      stuff_name: Faker::Commerce.unique.material
     )
 
     @stuff.save

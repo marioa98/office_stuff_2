@@ -13,3 +13,11 @@ ENV['RAILS_ENV'] ||= 'test'
 
 knapsack_pro_adapter = KnapsackPro::Adapters::MinitestAdapter.bind
 knapsack_pro_adapter.set_test_helper_path(__FILE__)
+
+class ActiveSupport::TestCase
+  # Run tests in parallel with specified workers
+
+  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+
+  # Add more helper methods to be used by all tests here...
+end

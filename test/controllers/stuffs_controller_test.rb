@@ -3,10 +3,15 @@ require 'test_helper'
 class StuffsControllerTest < ActionDispatch::IntegrationTest
   
   def setup
-    @category = Category.first.valid? ? Category.first : Category.create(category_name: Faker::Commerce.department)
+    @category = Category.first.valid? ? Category.first : Category.create(category_name: Faker::Commerce.unique.department)
 
     password = Faker::Lorem.word
-    @user = User.new(full_name: Faker::Name.name, email: Faker::Internet.email,username: Faker::Internet.username, password: password)
+    @user = User.new(
+      full_name: Faker::Name.name, 
+      email: Faker::Internet.unique.email,
+      username: Faker::Internet.unique.username, 
+      password: password
+    )
 
     @user.save
     post '/login', params: {user: {username_or_email: @user.email, password: password}}
