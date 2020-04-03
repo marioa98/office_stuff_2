@@ -246,7 +246,7 @@ DEPENDENCIES
   knapsack_pro
   letter_opener
   listen (>= 3.0.5, < 3.2)
-  pg
+  pg (>= 0.18, < 2.0)
   pry
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)

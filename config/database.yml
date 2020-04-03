@@ -27,7 +27,6 @@ development:
   host: <%= ENV['DATABASE_HOST'] %>
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
-  port: <%= ENV['DATABASE_PORT'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -90,4 +89,5 @@ production:
   <<: *default
   database: office_stuff_production
   username: office_stuff
+  url: <% ENV['DATABASE_URL'] %>
   password: <%= ENV['OFFICE_STUFF_DATABASE_PASSWORD'] %>
