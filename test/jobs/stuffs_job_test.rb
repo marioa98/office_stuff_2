@@ -18,7 +18,7 @@ class StuffsJobTest < ActiveJob::TestCase
       admin: true
     )
 
-    @category = Category.first.valid? ? Category.first : Category.create(category_name: Faker::Commerce.unique.department)
+    @category = Category.first.present? ? Category.first : Category.create(category_name: Faker::Commerce.unique.department)
 
     @common.save
     @admin.save

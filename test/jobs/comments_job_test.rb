@@ -3,7 +3,7 @@ require 'test_helper'
 class CommentsJobTest < ActiveJob::TestCase
   include ActionMailer::TestHelper
   def setup
-    category = Category.first.valid? ? Category.first : Category.create(category_name: Faker::Commerce.department)
+    category = Category.first.present? ? Category.first : Category.create(category_name: Faker::Commerce.department)
     password = Faker::Lorem.word
     @owner = User.new(
       full_name: Faker::Name.name,

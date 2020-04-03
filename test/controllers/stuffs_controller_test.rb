@@ -3,7 +3,7 @@ require 'test_helper'
 class StuffsControllerTest < ActionDispatch::IntegrationTest
   
   def setup
-    @category = Category.first.valid? ? Category.first : Category.create(category_name: Faker::Commerce.unique.department)
+    @category = Category.first.present? ? Category.first : Category.create(category_name: Faker::Commerce.unique.department)
 
     password = Faker::Lorem.word
     @user = User.new(
