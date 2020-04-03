@@ -4,7 +4,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @password = Faker::Lorem.word
     @user = User.new(full_name: Faker::Name.name, email: Faker::Internet.unique.email,username: Faker::Internet.unique.username, password: @password)
-    category = Category.first.valid? ? Category.first : Category.create(category_name: Faker::Commerce.unique.department)
+    category = Category.first.present? ? Category.first : Category.create(category_name: Faker::Commerce.unique.department)
     @stuff = Stuff.new(user: @user, category: category, stuff_name: Faker::Lorem.unique.word)
 
     @user.save
