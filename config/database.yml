@@ -89,5 +89,5 @@ production:
   <<: *default
   database: office_stuff_production
   username: office_stuff
-  host: <% ENV['DATABASE_URL'] %>
+  url: <%= ENV['DATABASE_URL'] %>
   password: <%= ENV['OFFICE_STUFF_DATABASE_PASSWORD'] %>
